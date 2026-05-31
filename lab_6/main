@@ -1,0 +1,22 @@
+class SentenceIterator:
+    def __init__(self, words):
+        self.words = sorted(words)
+        self.index = 0
+    def __next__(self):
+        if self.index >= len(self.words):
+            raise StopIteration
+        word = self.words[self.index]
+        self.index += 1
+        return word
+    def __iter__(self):
+        return self
+
+class Sentence:
+    def __init__(self, text=""):
+        self.words = text.split()
+    def __iter__(self):
+        return SentenceIterator(self.words)
+s = Sentence("яблуко груша банан слива абрикос")
+print("Слова у лексикографічному порядку:")
+for word in s:
+    print(word)
